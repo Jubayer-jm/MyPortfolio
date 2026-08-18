@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Jubayer Ahmed — ICT Student & Java Learner</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg-soft:#131a24;
+    --panel:#161d29;
+    --border:#232c3d;
+    --text:#e6edf3;
+    --text-dim:#8b96a8;
+    --brand:#5cc8ff;
+    --brand-2:#7dffb3;
+    --accent:#ffb454;
+    --danger:#ff6b6b;
+    --mono:'JetBrains Mono','Fira Code',Consolas,monospace;
+    --sans:'Inter','Segoe UI',sans-serif;
+  }
+  [data-theme="light"]{
+    --bg:#f5f3ee;
+    --bg-soft:#ebe8e0;
+    --panel:#ffffff;
+    --border:#ddd8cc;
+    --text:#1c1c1c;
+    --text-dim:#6b6558;
+    --brand:#0077b6;
+    --brand-2:#0a8f5c;
+    --accent:#c9762f;
+    --danger:#c0392b;
+  }
+  body{transition:background 0.3s, color 0.3s;}
+  .theme-btn{
+    background:var(--panel); border:1px solid var(--border); border-radius:20px;
+    width:36px; height:36px; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center;
+    transition:0.2s;
+  }
+  .theme-btn:hover{border-color:var(--brand);}
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+  }
+  a{color:var(--brand); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  img{max-width:100%; display:block;}
+
+  /* ===== NAV ===== */
+  header.nav{
+    position:sticky; top:0; z-index:100;
+    background:rgba(13,17,23,0.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+    padding:14px 32px;
+  }
+  .logo-group{display:flex; align-items:center; gap:10px;}
+  .nav-logo{width:32px; height:32px; object-fit:contain;}
+  .logo{font-family:var(--mono); font-weight:700; font-size:1.1rem; color:var(--brand-2);}
+  .logo span{color:var(--text-dim);}
+  nav.links{display:flex; gap:24px; font-family:var(--mono); font-size:0.85rem;}
+  nav.links a{color:var(--text-dim);}
+  nav.links a:hover{color:var(--brand); text-decoration:none;}
+
+  /* ===== HERO ===== */
+  .hero{
+    max-width:1100px; margin:0 auto; padding:90px 32px 60px;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:48px; align-items:center;
+  }
+  .hero-eyebrow{
+    font-family:var(--mono); color:var(--brand-2); font-size:0.85rem;
+    letter-spacing:0.08em; margin-bottom:14px; text-transform:uppercase;
+  }
+  .hero h1{
+    font-size:2.6rem; line-height:1.15; margin-bottom:16px; letter-spacing:-0.02em;
+  }
+  .hero h1 .accent{color:var(--brand);}
+  .hero p.tagline{
+    font-size:1.15rem; color:var(--text-dim); max-width:520px; margin-bottom:26px;
+  }
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:0.85rem; padding:11px 22px; border-radius:6px;
+    border:1px solid var(--border); background:var(--panel); color:var(--text);
+    cursor:pointer; transition:0.2s;
+  }
+  .btn:hover{border-color:var(--brand); color:var(--brand); text-decoration:none;}
+  .btn.primary{background:var(--brand); color:#04121c; border-color:var(--brand); font-weight:700;}
+  .btn.primary:hover{background:var(--brand-2); border-color:var(--brand-2); color:#04121c;}
+
+  .hero-photo{
+    aspect-ratio:1; border-radius:14px; background:var(--panel);
+    border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); color:var(--text-dim); font-size:0.8rem; overflow:hidden; position:relative;
+  }
+  .hero-photo::before{
+    content:'{ }'; position:absolute; font-size:6rem; color:var(--border); font-family:var(--mono);
+  }
+  .hero-photo img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+
+  section{max-width:1100px; margin:0 auto; padding:70px 32px;}
+  /* ===== SEMESTER COURSE CARDS ===== */
+  .course-cards-grid{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:18px;
+  }
+  .course-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:22px;
+    transition:0.2s;
+  }
+  .course-card:hover{border-color:var(--brand);}
+  .course-card-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
+  .course-code{font-family:var(--mono); font-size:0.82rem; color:var(--accent); font-weight:700; letter-spacing:0.03em;}
+  .course-badge{
+    font-family:var(--mono); font-size:0.72rem; padding:4px 10px; border-radius:20px;
+    border:1px solid var(--border); color:var(--text-dim);
+  }
+  .course-badge.live{color:var(--brand-2); border-color:var(--brand-2);}
+  .course-card h4{font-size:1.05rem; margin-bottom:8px; line-height:1.3;}
+  .course-card .course-desc{color:var(--text-dim); font-size:0.88rem; margin-bottom:16px; min-height:40px;}
+  .course-toggle{
+    font-family:var(--mono); font-size:0.82rem; color:var(--brand); cursor:pointer; background:none; border:none; padding:0;
+  }
+  .course-toggle:hover{text-decoration:underline;}
+  .course-notes{max-height:0; overflow:hidden; transition:max-height 0.3s ease;}
+  .course-notes-inner{padding-top:16px;}
+
+  section + section{border-top:1px solid var(--border);}
+  .section-head{margin-bottom:36px;}
+  .section-eyebrow{
+    font-family:var(--mono); color:var(--brand-2); font-size:0.8rem;
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;
+  }
+  .section-head h2{font-size:1.8rem;}
+
+  /* ===== ABOUT ===== */
+  .about-grid{display:grid; grid-template-columns:2fr 1fr; gap:40px;}
+  .about-grid p{color:var(--text-dim); margin-bottom:14px;}
+  .info-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:20px;
+  }
+  .info-card h3{font-family:var(--mono); font-size:0.85rem; color:var(--brand-2); margin-bottom:14px; text-transform:uppercase;}
+  .info-row{display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.9rem;}
+  .info-row:last-child{border-bottom:none;}
+  .info-row span:first-child{color:var(--text-dim);}
+  .info-row a{color:var(--text); font-family:var(--mono); font-size:0.85rem;}
+  .info-row a:hover{color:var(--brand);}
+
+  .stat-card{
+    background:linear-gradient(160deg, var(--panel), var(--bg-soft));
+    border:1px solid var(--border); border-radius:14px; padding:24px;
+    position:relative; overflow:hidden;
+  }
+  .stat-card::before{
+    content:''; position:absolute; top:-40%; right:-30%; width:220px; height:220px;
+    background:radial-gradient(circle, rgba(92,200,255,0.15), transparent 70%);
+    pointer-events:none;
+  }
+  .stat-card-head{
+    font-family:var(--mono); font-size:0.78rem; color:var(--brand-2); text-transform:uppercase;
+    letter-spacing:0.1em; margin-bottom:20px; position:relative;
+  }
+  .stat-card-logo{
+    position:absolute; top:20px; right:20px; width:52px; height:52px; object-fit:contain;
+    opacity:0.85;
+  }
+  .stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px 14px; position:relative;}
+  .stat-item{border-left:2px solid var(--border); padding-left:12px;}
+  .stat-item .stat-label{font-family:var(--mono); font-size:0.7rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;}
+  .stat-item .stat-value{font-size:0.95rem; font-weight:600;}
+  .stat-item .stat-value.mono{font-family:var(--mono);}
+  .stat-item .stat-value a{color:var(--text); font-weight:600;}
+  .stat-item .stat-value a:hover{color:var(--brand);}
+  .stat-focus{margin-top:22px; padding-top:18px; border-top:1px solid var(--border); position:relative;}
+  .stat-focus .stat-label{font-family:var(--mono); font-size:0.7rem; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:10px;}
+  .focus-tags{display:flex; gap:8px; flex-wrap:wrap;}
+  .focus-tags span{
+    font-family:var(--mono); font-size:0.78rem; padding:5px 12px; border-radius:16px;
+    background:rgba(92,200,255,0.1); color:var(--brand); border:1px solid rgba(92,200,255,0.25);
+  }
+
+  /* ===== SKILLS ===== */
+  .skills-grid{display:flex; flex-wrap:wrap; gap:12px;}
+  .skill-pill{
+    font-family:var(--mono); font-size:0.85rem; padding:9px 16px; border-radius:20px;
+    border:1px solid var(--border); background:var(--panel); color:var(--text-dim);
+    transition:0.2s;
+  }
+  .skill-pill:hover{border-color:var(--brand); color:var(--brand);}
+
+  .skill-bars{display:flex; flex-direction:column; gap:20px; max-width:640px;}
+  .skill-bar-row .skill-bar-top{display:flex; justify-content:space-between; margin-bottom:8px; font-family:var(--mono); font-size:0.85rem;}
+  .skill-bar-row .skill-bar-top .skill-pct{color:var(--text-dim);}
+  .skill-bar-track{height:10px; background:var(--panel); border:1px solid var(--border); border-radius:6px; overflow:hidden;}
+  .skill-bar-fill{
+    height:100%; width:0%; border-radius:6px;
+    background:linear-gradient(90deg, var(--brand), var(--brand-2));
+    transition:width 1.1s cubic-bezier(0.2,0.8,0.2,1);
+  }
+
+  /* ===== PROJECTS ===== */
+  .projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;}
+  .project-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:22px;
+    transition:0.2s;
+  }
+  .project-card:hover{border-color:var(--brand); transform:translateY(-3px);}
+  .project-card h3{font-size:1.05rem; margin-bottom:8px;}
+  .project-card p{color:var(--text-dim); font-size:0.9rem; margin-bottom:14px;}
+  .project-card a{font-family:var(--mono); font-size:0.82rem;}
+  .placeholder-note{
+    font-family:var(--mono); font-size:0.8rem; color:var(--text-dim);
+    border:1px dashed var(--border); border-radius:8px; padding:16px; text-align:center;
+  }
+
+  /* ===== COURSE / MODULES ===== */
+  .course-layout{display:grid; grid-template-columns:280px 1fr; gap:32px; align-items:start;}
+  .module-list{
+    position:sticky; top:80px; display:flex; flex-direction:column; gap:6px;
+    background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:10px;
+  }
+  .module-btn{
+    text-align:left; background:transparent; border:none; color:var(--text-dim);
+    font-family:var(--mono); font-size:0.85rem; padding:12px 14px; border-radius:6px; cursor:pointer;
+    display:flex; justify-content:space-between; gap:8px;
+  }
+  .module-btn:hover{background:var(--bg-soft); color:var(--text);}
+  .module-btn.active{background:var(--bg-soft); color:var(--brand); border-left:3px solid var(--brand);}
+  .module-btn .num{color:var(--text-dim); margin-right:6px;}
+  .module-progress-tag{font-family:var(--mono); font-size:0.7rem; color:var(--text-dim); flex-shrink:0;}
+  .module-btn.active .module-progress-tag{color:var(--brand);}
+
+  .module-progress-bar-wrap{display:flex; align-items:center; gap:10px; margin-bottom:24px;}
+  .module-progress-bar-track{flex:1; height:6px; background:var(--bg-soft); border-radius:4px; overflow:hidden;}
+  .module-progress-bar-fill{height:100%; background:linear-gradient(90deg, var(--brand), var(--brand-2)); border-radius:4px; transition:width 0.3s ease;}
+  .module-progress-bar-label{font-family:var(--mono); font-size:0.78rem; color:var(--text-dim); flex-shrink:0;}
+
+  .overall-progress-wrap{
+    display:flex; align-items:center; gap:14px; margin-bottom:28px;
+    background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px 20px;
+  }
+  .overall-progress-track{flex:1; height:10px; background:var(--bg-soft); border-radius:6px; overflow:hidden;}
+  .overall-progress-fill{height:100%; width:0%; background:linear-gradient(90deg, var(--brand), var(--brand-2)); border-radius:6px; transition:width 0.4s ease;}
+  .overall-progress-label{font-family:var(--mono); font-size:0.82rem; color:var(--text-dim); white-space:nowrap;}
+
+  .search-wrap{position:relative; margin-bottom:24px;}
+  .search-input{
+    width:100%; padding:13px 18px; border-radius:8px; border:1px solid var(--border);
+    background:var(--panel); color:var(--text); font-family:var(--sans); font-size:0.95rem;
+  }
+  .search-input:focus{outline:none; border-color:var(--brand);}
+  .search-results{
+    position:absolute; top:calc(100% + 6px); left:0; right:0; z-index:20;
+    background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    max-height:320px; overflow-y:auto; display:none;
+  }
+  .search-results.show{display:block;}
+  .search-result-item{
+    padding:12px 18px; cursor:pointer; border-bottom:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .search-result-item:last-child{border-bottom:none;}
+  .search-result-item:hover{background:var(--bg-soft);}
+  .search-result-item .srt-title{font-weight:600; font-size:0.9rem;}
+  .search-result-item .srt-module{font-family:var(--mono); font-size:0.75rem; color:var(--text-dim);}
+  .search-no-results{padding:16px 18px; color:var(--text-dim); font-size:0.88rem;}
+
+  .playground-box{
+    background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:22px;
+  }
+  .playground-select{
+    width:100%; padding:11px 14px; border-radius:8px; border:1px solid var(--border);
+    background:var(--bg-soft); color:var(--text); font-family:var(--mono); font-size:0.88rem;
+    margin-bottom:16px;
+  }
+  .playground-pre{
+    background:#0a0e14; border:1px solid var(--border); border-radius:8px; padding:18px;
+    overflow-x:auto; font-family:var(--mono); font-size:0.85rem; color:#c9d1d9; min-height:120px;
+  }
+
+  .quiz-box{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:22px;}
+  .quiz-question{margin-bottom:22px; padding-bottom:20px; border-bottom:1px solid var(--border);}
+  .quiz-question:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .quiz-q-text{font-weight:600; margin-bottom:12px; font-size:0.95rem;}
+  .quiz-options{display:flex; flex-direction:column; gap:8px;}
+  .quiz-option{
+    display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:8px;
+    border:1px solid var(--border); background:var(--bg-soft); cursor:pointer; font-size:0.88rem;
+    transition:0.15s;
+  }
+  .quiz-option:hover{border-color:var(--brand);}
+  .quiz-option.correct{border-color:var(--brand-2); background:rgba(125,255,179,0.1); color:var(--brand-2);}
+  .quiz-option.incorrect{border-color:var(--danger); background:rgba(255,107,107,0.1); color:var(--danger);}
+  .quiz-option.disabled{pointer-events:none;}
+  .quiz-score{
+    margin-top:20px; padding-top:20px; border-top:1px solid var(--border);
+    font-family:var(--mono); font-size:1rem; color:var(--brand-2); text-align:center;
+  }
+  .quiz-retry{
+    margin-top:14px; display:block; margin-left:auto; margin-right:auto;
+  }
+
+  .topic-check{display:flex; align-items:center; margin-right:4px;}
+  .topic-checkbox{width:18px; height:18px; accent-color:var(--brand-2); cursor:pointer;}
+  .topic-card.done .topic-header h4{color:var(--brand-2); text-decoration:line-through; text-decoration-color:var(--text-dim);}
+
+  .module-panel h3.module-title{font-size:1.4rem; margin-bottom:6px;}
+  .module-panel p.module-desc{color:var(--text-dim); margin-bottom:24px; font-size:0.92rem;}
+
+  .topic-grid{display:flex; flex-direction:column; gap:14px;}
+  .topic-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:10px; overflow:hidden;
+  }
+  .topic-header{
+    display:flex; justify-content:space-between; align-items:center; padding:16px 20px;
+    cursor:pointer; user-select:none;
+  }
+  .topic-header:hover{background:var(--bg-soft);}
+  .topic-header h4{font-size:1rem; font-weight:600;}
+  .topic-header .chevron{color:var(--text-dim); font-family:var(--mono); transition:0.2s;}
+  .topic-card.open .chevron{transform:rotate(90deg); color:var(--brand);}
+  .topic-body{
+    max-height:0; overflow:hidden; transition:max-height 0.35s ease;
+    border-top:1px solid transparent;
+  }
+  .topic-card.open .topic-body{border-top:1px solid var(--border);}
+  .topic-body-inner{padding:20px;}
+  .topic-video{
+    position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:8px;
+    overflow:hidden; margin-bottom:18px;
+  }
+  .topic-video iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .video-thumb-link{position:relative;}
+  .play-overlay{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    background:rgba(0,0,0,0.3); transition:0.2s;
+  }
+  .video-thumb-link:hover .play-overlay{background:rgba(0,0,0,0.1);}
+  .play-overlay::after{
+    content:'▶'; display:flex; align-items:center; justify-content:center;
+    width:64px; height:64px; border-radius:50%; background:rgba(220,30,30,0.92);
+    color:#fff; font-size:1.4rem; padding-left:5px;
+  }
+  .topic-section-label{
+    font-family:var(--mono); font-size:0.72rem; color:var(--brand-2); text-transform:uppercase;
+    letter-spacing:0.06em; margin:16px 0 6px;
+  }
+  .topic-section-label:first-child{margin-top:0;}
+  .topic-body-inner p{color:var(--text-dim); font-size:0.92rem;}
+  .merit-demerit{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0;}
+  .merit-demerit ul{padding-left:18px; font-size:0.88rem; color:var(--text-dim);}
+  .merit-demerit .merits ul li{color:var(--brand-2);}
+  .merit-demerit .demerits ul li{color:var(--danger);}
+  pre{
+    background:#0a0e14; border:1px solid var(--border); border-radius:8px; padding:16px;
+    overflow-x:auto; font-family:var(--mono); font-size:0.82rem; color:#c9d1d9; margin:10px 0;
+  }
+  .learn-more{
+    display:inline-block; margin-top:8px; font-family:var(--mono); font-size:0.82rem;
+    border:1px solid var(--border); padding:6px 14px; border-radius:6px;
+  }
+  .learn-more:hover{border-color:var(--brand); text-decoration:none;}
+
+  /* ===== CONTACT ===== */
+  .contact-grid{display:flex; gap:16px; flex-wrap:wrap;}
+  .contact-card{
+    flex:1; min-width:200px; background:var(--panel); border:1px solid var(--border);
+    border-radius:10px; padding:22px; text-align:center;
+  }
+  .contact-card .label{font-family:var(--mono); font-size:0.75rem; color:var(--text-dim); text-transform:uppercase; margin-bottom:8px;}
+  .contact-card a{font-family:var(--mono); font-size:0.95rem;}
+
+  footer{
+    text-align:center; padding:40px; color:var(--text-dim); font-family:var(--mono); font-size:0.8rem;
+    border-top:1px solid var(--border);
+  }
+
+  @media(max-width:800px){
+    .hero{grid-template-columns:1fr; padding-top:60px;}
+    .hero-photo{order:-1; max-width:220px; margin:0 auto;}
+    .about-grid{grid-template-columns:1fr;}
+    .course-layout{grid-template-columns:1fr;}
+    .module-list{position:static; flex-direction:row; overflow-x:auto;}
+    .merit-demerit{grid-template-columns:1fr;}
+    nav.links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="logo-group">
+    <img src="mbstu-logo.png" alt="MBSTU Logo" class="nav-logo">
+    <div class="logo">jubayer<span>.dev</span></div>
+  </div>
+  <nav class="links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#course">Java Course</a>
+    <a href="#playground">Playground</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#semester">2.2 Courses</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <button id="theme-toggle" class="theme-btn" title="Toggle theme">🌙</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">// currently compiling knowledge</div>
+    <h1>Md. Jubayer Ahmed <br><span class="accent">learns, builds & solves with Java.</span></h1>
+    <p class="tagline">ICT student who enjoys turning problems into working code — one class, one loop, one exception at a time.</p>
+    <div class="hero-cta">
+      <a href="#course" class="btn primary">Explore Java Course</a>
+      <a href="#projects" class="btn">View Projects</a>
+    </div>
+  </div>
+  <div class="hero-photo" id="hero-photo">
+    <img src="profile.jpg" alt="Md. Jubayer Ahmed">
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-head">
+    <div class="section-eyebrow">01 / About</div>
+    <h2>About Me</h2>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p>I'm Md. Jubayer Ahmed, a 2nd year, 2nd semester student of Information and Communication Technology (ICT) at Mawlana Bhashani Science and Technology University (MBSTU).</p>
+      <p>I'm currently deep in Java — learning OOP, Data Structures & Algorithms, and the fundamentals of software engineering. I enjoy solving problems and I'm always looking to pick up new tools and technologies along the way.</p>
+      <p>This portfolio doubles as my personal Java learning log — a structured course of 10 modules I'm building and studying through as I go.</p>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card-head">Quick Info</div>
+      <img src="mbstu-logo.png" alt="MBSTU" class="stat-card-logo">
+      <div class="stat-grid">
+        <div class="stat-item">
+          <div class="stat-label">Student ID</div>
+          <div class="stat-value mono">IT-24027</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Degree</div>
+          <div class="stat-value">B.Sc in ICT</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Year</div>
+          <div class="stat-value">2nd Year, 2nd Sem</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Department</div>
+          <div class="stat-value"><a href="https://ict.mbstu.ac.bd/" target="_blank">ICT</a></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">University</div>
+          <div class="stat-value"><a href="https://mbstu.ac.bd/" target="_blank">MBSTU</a></div>
+        </div>
+      </div>
+      <div class="stat-focus">
+        <div class="stat-label">Focus</div>
+        <div class="focus-tags">
+          <span>Java</span><span>OOP</span><span>DSA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-head">
+    <div class="section-eyebrow">02 / Skills</div>
+    <h2>Skills</h2>
+    <p style="color:var(--text-dim); font-size:0.85rem; margin-top:6px;">Self-rated proficiency — bars animate into view as you scroll.</p>
+  </div>
+  <div class="skill-bars" id="skill-bars"></div>
+</section>
+
+<section id="course">
+  <div class="section-head">
+    <div class="section-eyebrow">03 / Learning</div>
+    <h2>Java Course — 10 Modules</h2>
+  </div>
+  <div class="overall-progress-wrap">
+    <span class="overall-progress-label" style="color:var(--brand-2);">Overall</span>
+    <div class="overall-progress-track"><div class="overall-progress-fill" id="overall-progress-bar"></div></div>
+    <span class="overall-progress-label" id="overall-progress-label">0 / 0 topics completed (0%)</span>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="topic-search" class="search-input" placeholder="Search a topic — e.g. Inheritance, HashMap, Lambda...">
+    <div class="search-results" id="search-results"></div>
+  </div>
+  <div class="course-layout">
+    <div class="module-list" id="module-list"></div>
+    <div class="module-panel" id="module-panel"></div>
+  </div>
+</section>
+
+<section id="playground">
+  <div class="section-head">
+    <div class="section-eyebrow">04 / Practice</div>
+    <h2>Code Playground</h2>
+    <p style="color:var(--text-dim); font-size:0.85rem; margin-top:6px;">Browse real code examples from the course. (Display only — this page can't compile Java; copy the code into an IDE like IntelliJ or an online Java compiler to run it.)</p>
+  </div>
+  <div class="playground-box">
+    <select id="playground-select" class="playground-select"></select>
+    <pre id="playground-code" class="playground-pre"></pre>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="section-head">
+    <div class="section-eyebrow">05 / Test Yourself</div>
+    <h2>Module Quiz</h2>
+    <p style="color:var(--text-dim); font-size:0.85rem; margin-top:6px;">Pick a module and answer a few quick questions to check your understanding.</p>
+  </div>
+  <div class="quiz-box">
+    <select id="quiz-select" class="playground-select"></select>
+    <div id="quiz-body"></div>
+  </div>
+</section>
+
+<section id="semester">
+  <div class="section-head">
+    <div class="section-eyebrow">06 / Semester</div>
+    <h2>2.2 Semester Courses</h2>
+    <p style="color:var(--text-dim); font-size:0.9rem; margin-top:8px;">ID: IT-24027 &nbsp;·&nbsp; Dept. of ICT, MBSTU. Click a course to open it and add your own notes — notes save in your browser only, not shared publicly.</p>
+  </div>
+  <div class="course-cards-grid" id="semester-grid"></div>
+</section>
+
+<section id="projects">
+  <div class="section-head">
+    <div class="section-eyebrow">07 / Work</div>
+    <h2>Projects</h2>
+  </div>
+  <div class="projects-grid" id="projects-grid">
+    <div class="placeholder-note">Project cards will go here — send me the repo names, links & short descriptions and I'll add them in.</div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-head">
+    <div class="section-eyebrow">08 / Reach Me</div>
+    <h2>Contact</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-card">
+      <div class="label">Email</div>
+      <a href="mailto:mdjubayerahmed762@gmail.com">mdjubayerahmed762@gmail.com</a>
+    </div>
+    <div class="contact-card">
+      <div class="label">GitHub</div>
+      <a href="https://github.com/Jubayer-jm" target="_blank">github.com/Jubayer-jm</a>
+    </div>
+    <div class="contact-card">
+      <div class="label">LinkedIn</div>
+      <a href="https://www.linkedin.com/in/jubayer-ahmed-b4b5b23ab" target="_blank">linkedin.com/in/jubayer-ahmed</a>
+    </div>
+    <div class="contact-card">
+      <div class="label">Message Me</div>
+      <a href="https://wa.me/8801627610760" target="_blank">WhatsApp: 01627610760</a>
+    </div>
+  </div>
+</section>
+
+<footer>Built by Md. Jubayer Ahmed — Java Learning Portfolio © 2026</footer>
+
+<script>
+// ================= DATA =================
+// Each topic: title, videoId (YouTube), desc, merits[], demerits[], code, learnMore
+const modules = [
+  {
+    title: "Java Basics",
+    intro: "4ekASokneGU",
+    desc: "The foundation — how Java code is written, stored, and run.",
+    topics: [
+      {
+        title: "Variables & Data Types",
+        videoId: "X0zdAG7gfgs",
+        desc: "Learn how Java stores data using variables, and the built-in primitive types like int, double, char, and boolean.",
+        merits: ["Type safety catches errors early", "Predictable memory usage", "Clear, readable code"],
+        demerits: ["More verbose than dynamically typed languages", "Must declare type before use"],
+        code: `int age = 20;
+double gpa = 3.85;
+char grade = 'A';
+boolean isPassed = true;
+String name = "Jubayer";`,
+        learnMore: "https://www.w3schools.com/java/java_variables.asp"
+      },
+      {
+        title: "Operators",
+        videoId: "tq4aSSejR_0",
+        desc: "Arithmetic, relational, logical, and assignment operators used to manipulate values and make decisions.",
+        merits: ["Concise way to perform calculations", "Supports complex logical expressions"],
+        demerits: ["Operator precedence can confuse beginners", "Easy to misuse == vs equals() for objects"],
+        code: `int a = 10, b = 3;
+System.out.println(a + b); // 13
+System.out.println(a % b); // 1
+System.out.println(a > b && b > 0); // true`,
+        learnMore: "https://www.w3schools.com/java/java_operators.asp"
+      },
+      {
+        title: "Input/Output (Scanner)",
+        videoId: "61DiCXgqakU",
+        desc: "How to read user input from the console using the Scanner class, and print output.",
+        merits: ["Simple, beginner-friendly API", "Works for most primitive types and strings"],
+        demerits: ["Slower than BufferedReader for large input", "Must remember to close the Scanner"],
+        code: `Scanner sc = new Scanner(System.in);
+System.out.print("Enter your name: ");
+String name = sc.nextLine();
+System.out.println("Hello, " + name);`,
+        learnMore: "https://www.w3schools.com/java/java_user_input.asp"
+      },
+      {
+        title: "Comments & Syntax",
+        videoId: "xk4_1vDrzzo",
+        desc: "Java's basic syntax rules, plus single-line, multi-line, and documentation comments.",
+        merits: ["Comments improve code readability", "Javadoc comments auto-generate documentation"],
+        demerits: ["Excessive commenting can clutter code", "Comments can go outdated if not maintained"],
+        code: `// single-line comment
+/* multi-line
+   comment */
+/** Javadoc comment for documentation */
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello World");
+    }
+}`,
+        learnMore: "https://www.w3schools.com/java/java_comments.asp"
+      },
+      {
+        title: "Type Casting",
+        videoId: "wW1vHv77pp4",
+        desc: "Converting one data type into another — widening (implicit) and narrowing (explicit) casting.",
+        merits: ["Allows flexible use of numeric types", "Widening casts are automatic and safe"],
+        demerits: ["Narrowing casts can lose data/precision", "Can introduce subtle bugs if done carelessly"],
+        code: `double d = 9.78;
+int i = (int) d;      // narrowing, i = 9
+
+int x = 10;
+double y = x;         // widening, automatic`,
+        learnMore: "https://www.w3schools.com/java/java_type_casting.asp"
+      }
+    ]
+  },
+  {
+    title: "Control Flow",
+    intro: "WZXq5_9_JDs",
+    desc: "Directing how a program makes decisions and repeats actions.",
+    topics: [
+      { title:"If-Else", videoId:"fsTC0Mqy0EU",
+        desc:"Conditional branching using if, else if, and else to run different code blocks based on a condition.",
+        merits:["Simple to read and reason about","Handles multiple branching conditions"],
+        demerits:["Long if-else chains get hard to maintain","Can often be replaced by switch for cleaner code"],
+        code:`int marks = 75;
+if (marks >= 80) {
+    System.out.println("A+");
+} else if (marks >= 60) {
+    System.out.println("A");
+} else {
+    System.out.println("Fail");
+}`, learnMore:"https://www.w3schools.com/java/java_conditions.asp" },
+      { title:"Switch", videoId:"eKGgAaqEnyE",
+        desc:"An alternative to multiple if-else statements, used to select one of many code blocks to execute.",
+        merits:["Cleaner than long if-else chains","Fast lookup for many fixed cases"],
+        demerits:["Only works with specific types (int, String, enum, etc.)","Forgetting 'break' causes fall-through bugs"],
+        code:`int day = 3;
+switch (day) {
+    case 1: System.out.println("Mon"); break;
+    case 2: System.out.println("Tue"); break;
+    case 3: System.out.println("Wed"); break;
+    default: System.out.println("Other");
+}`, learnMore:"https://www.w3schools.com/java/java_switch.asp" },
+      { title:"For Loop", videoId:"5zlp3kOFYUM",
+        desc:"A loop that repeats a block of code a known number of times using a counter.",
+        merits:["Compact syntax with init, condition, update in one line","Great for iterating arrays/collections"],
+        demerits:["Off-by-one errors are common for beginners","Less readable for complex conditions than while"],
+        code:`for (int i = 1; i <= 5; i++) {
+    System.out.println("Count: " + i);
+}`, learnMore:"https://www.w3schools.com/java/java_for_loop.asp" },
+      { title:"While / Do-While", videoId:"NRTXBOfSSPI",
+        desc:"Loops that repeat while a condition is true — while checks first, do-while runs at least once.",
+        merits:["Good when the number of iterations is unknown","do-while guarantees at least one execution"],
+        demerits:["Easy to create infinite loops if condition never becomes false","Slightly less intuitive than for-loops for counting"],
+        code:`int i = 1;
+while (i <= 5) {
+    System.out.println(i);
+    i++;
+}
+do {
+    System.out.println("Runs once minimum");
+} while (false);`, learnMore:"https://www.w3schools.com/java/java_while_loop.asp" },
+      { title:"Break & Continue", videoId:"Q57BWzMSjLI",
+        desc:"Control statements that exit a loop early (break) or skip to the next iteration (continue).",
+        merits:["Gives fine-grained control over loop execution","Avoids unnecessary iterations, improving efficiency"],
+        demerits:["Overuse can make loop logic harder to follow","Can lead to spaghetti-like control flow if misused"],
+        code:`for (int i = 1; i <= 10; i++) {
+    if (i == 5) continue;
+    if (i == 8) break;
+    System.out.println(i);
+}`, learnMore:"https://www.w3schools.com/java/java_break.asp" }
+    ]
+  },
+  {
+    title: "OOP Fundamentals",
+    intro: "bSrm9RXwBaI",
+    desc: "Core building blocks of object-oriented programming in Java.",
+    topics: [
+      { title:"Classes & Objects", videoId:"AUCr0aYqjJk",
+        desc:"A class is a blueprint for objects; an object is an instance of a class holding real data.",
+        merits:["Models real-world entities naturally","Encourages reusable, organized code"],
+        demerits:["Overhead of designing classes for very small programs","Can be over-engineered for simple scripts"],
+        code:`class Car {
+    String model;
+    void drive() {
+        System.out.println(model + " is driving");
+    }
+}
+Car myCar = new Car();
+myCar.model = "Corolla";
+myCar.drive();`, learnMore:"https://www.w3schools.com/java/java_classes.asp" },
+      { title:"Constructors", videoId:"pQCJhk0N_p8",
+        desc:"Special methods used to initialize objects when they are created.",
+        merits:["Ensures objects start in a valid state","Supports overloading for flexible object creation"],
+        demerits:["Can become bloated with many parameters","Constructor chaining adds complexity for beginners"],
+        code:`class Student {
+    String name;
+    Student(String name) {
+        this.name = name;
+    }
+}
+Student s = new Student("Jubayer");`, learnMore:"https://www.w3schools.com/java/java_constructors.asp" },
+      { title:"this Keyword", videoId:"Fbu_44K4kL8",
+        desc:"A reference to the current object, commonly used to resolve naming conflicts between fields and parameters.",
+        merits:["Removes ambiguity between instance and local variables","Enables constructor chaining with this()"],
+        demerits:["Can be confusing for beginners at first","Overuse when not needed adds unnecessary clutter"],
+        code:`class Point {
+    int x;
+    Point(int x) {
+        this.x = x; // 'this.x' is the field, 'x' is the parameter
+    }
+}`, learnMore:"https://www.w3schools.com/java/ref_keyword_this.asp" },
+      { title:"Access Modifiers", videoId:"XogosDvpTUE",
+        desc:"Keywords (public, private, protected, default) that control visibility of classes, fields, and methods.",
+        merits:["Enforces encapsulation and data hiding","Improves security and code maintainability"],
+        demerits:["Wrong modifier choice can restrict needed access","Adds a learning curve for package-level design"],
+        code:`public class Account {
+    private double balance;
+    public double getBalance() {
+        return balance;
+    }
+}`, learnMore:"https://www.w3schools.com/java/java_modifiers.asp" },
+      { title:"Getters/Setters", videoId:"4hg9pMhaz1Q",
+        desc:"Public methods used to safely read and update private fields of a class.",
+        merits:["Protects data with validation logic before setting","Keeps fields encapsulated while allowing controlled access"],
+        demerits:["Boilerplate code for large classes with many fields","Can be misused as a workaround instead of real encapsulation"],
+        code:`class Person {
+    private int age;
+    public int getAge() { return age; }
+    public void setAge(int age) {
+        if (age > 0) this.age = age;
+    }
+}`, learnMore:"https://www.geeksforgeeks.org/java/getter-and-setter-in-java/" }
+    ]
+  },
+  {
+    title: "OOP Advanced",
+    intro: "bSrm9RXwBaI",
+    desc: "Deeper OOP concepts that make Java code flexible and extensible.",
+    topics: [
+      { title:"Inheritance", videoId:"5i5FCUtcvVw",
+        desc:"Allows a class (subclass) to inherit fields and methods from another class (superclass).",
+        merits:["Promotes code reuse","Models natural is-a relationships between classes"],
+        demerits:["Deep inheritance chains get hard to maintain","Tight coupling between parent and child classes"],
+        code:`class Animal {
+    void eat() { System.out.println("eating"); }
+}
+class Dog extends Animal {
+    void bark() { System.out.println("barking"); }
+}`, learnMore:"https://www.w3schools.com/java/java_inheritance.asp" },
+      { title:"Polymorphism", videoId:"27nSDwPPHwo",
+        desc:"The ability of an object to take many forms — via method overriding and overloading.",
+        merits:["Enables flexible and extensible code","Same method name behaves differently by context"],
+        demerits:["Can make code harder to trace/debug","Overuse of overloading can cause ambiguity"],
+        code:`class Shape {
+    void draw() { System.out.println("drawing shape"); }
+}
+class Circle extends Shape {
+    @Override
+    void draw() { System.out.println("drawing circle"); }
+}`, learnMore:"https://www.w3schools.com/java/java_polymorphism.asp" },
+      { title:"Abstraction", videoId:"fRD1LlDCXaY",
+        desc:"Hiding implementation details and exposing only essential features via abstract classes.",
+        merits:["Reduces complexity for the user of a class","Forces a consistent structure for subclasses"],
+        demerits:["Cannot instantiate abstract classes directly","Adds an extra layer of design to plan carefully"],
+        code:`abstract class Shape {
+    abstract double area();
+}
+class Square extends Shape {
+    double side = 4;
+    double area() { return side * side; }
+}`, learnMore:"https://www.w3schools.com/java/java_abstract.asp" },
+      { title:"Interfaces", videoId:"cepnOu4B5Ig",
+        desc:"A fully abstract type used to define a contract of methods that implementing classes must fulfill.",
+        merits:["Supports multiple inheritance of type","Decouples 'what' from 'how' cleanly"],
+        demerits:["All methods must be implemented unless default","Can lead to many small interface files to manage"],
+        code:`interface Vehicle {
+    void start();
+}
+class Bike implements Vehicle {
+    public void start() {
+        System.out.println("Bike started");
+    }
+}`, learnMore:"https://www.w3schools.com/java/java_interface.asp" },
+      { title:"Abstract Classes", videoId:"fRD1LlDCXaY",
+        desc:"Classes that cannot be instantiated on their own and may contain both abstract and concrete methods.",
+        merits:["Can share common code between subclasses","Good middle ground between interface and full class"],
+        demerits:["Java only allows single inheritance of a class","Less flexible than interfaces for unrelated classes"],
+        code:`abstract class Employee {
+    String name;
+    abstract double calculateSalary();
+    void showName() { System.out.println(name); }
+}`, learnMore:"https://www.geeksforgeeks.org/java/abstract-class-in-java/" }
+    ]
+  },
+  {
+    title: "Arrays & Strings",
+    intro: "NTHVTY6w2Co",
+    desc: "Working with collections of fixed data and text manipulation.",
+    topics: [
+      { title:"1D/2D Arrays", videoId:"09_LNAbwaWw",
+        desc:"Arrays store multiple values of the same type; 2D arrays are arrays of arrays, useful for grids/matrices.",
+        merits:["Fast, indexed access to elements","2D arrays model tables/matrices naturally"],
+        demerits:["Fixed size once created","Manual resizing needed if more space is required"],
+        code:`int[] nums = {1, 2, 3, 4};
+int[][] grid = {{1,2},{3,4}};
+System.out.println(grid[1][0]); // 3`, learnMore:"https://www.w3schools.com/java/java_arrays.asp" },
+      { title:"Array Methods", videoId:"BS3q4gGRfRw",
+        desc:"Built-in utility methods from java.util.Arrays for sorting, searching, filling, and copying arrays.",
+        merits:["Saves time vs writing manual algorithms","Well-tested, optimized implementations"],
+        demerits:["Less control over custom sorting logic unless using Comparator","Extra import required (java.util.Arrays)"],
+        code:`import java.util.Arrays;
+int[] nums = {5, 2, 8, 1};
+Arrays.sort(nums);
+System.out.println(Arrays.toString(nums));`, learnMore:"https://www.w3schools.com/java/java_arrays_methods.asp" },
+      { title:"String Class", videoId:"jS5ce9-6DrY",
+        desc:"Strings in Java are immutable objects representing sequences of characters.",
+        merits:["Immutability makes strings thread-safe","Rich built-in methods for text processing"],
+        demerits:["Immutability means every modification creates a new object","Can hurt performance with heavy concatenation in loops"],
+        code:`String s = "Hello";
+System.out.println(s.length());
+System.out.println(s.toUpperCase());`, learnMore:"https://www.w3schools.com/java/java_strings.asp" },
+      { title:"StringBuilder", videoId:"UtQ50cFtRkI",
+        desc:"A mutable sequence of characters, more efficient than String for repeated modifications.",
+        merits:["Much faster for building/modifying strings in loops","Mutable, avoiding creation of many temporary objects"],
+        demerits:["Not thread-safe (use StringBuffer for that)","Slightly less intuitive API than plain String"],
+        code:`StringBuilder sb = new StringBuilder();
+sb.append("Hello").append(" World");
+System.out.println(sb.toString());`, learnMore:"https://www.w3schools.com/java/java_stringbuilder.asp" },
+      { title:"String Methods", videoId:"jS5ce9-6DrY",
+        desc:"Common operations like substring, split, replace, trim, indexOf, and equals used to manipulate text.",
+        merits:["Covers most everyday text-processing needs","Consistent, well-documented API"],
+        demerits:["Using == instead of equals() for comparison is a common bug","Many methods return new strings, easy to forget to reassign"],
+        code:`String s = " Hello World ";
+System.out.println(s.trim());
+System.out.println(s.trim().split(" ")[0]);
+System.out.println(s.contains("World"));`, learnMore:"https://www.w3schools.com/java/java_ref_string.asp" }
+    ]
+  },
+  {
+    title: "Collections Framework",
+    intro: "VphowcSkBX4",
+    desc: "Java's built-in data structures for storing and managing groups of objects.",
+    topics: [
+      { title:"ArrayList", videoId:"aSbYzErkqLM",
+        desc:"A resizable array implementation of the List interface, allowing dynamic growth.",
+        merits:["Dynamic sizing, unlike plain arrays","Rich API: add, remove, sort, search built-in"],
+        demerits:["Slower than arrays for raw performance","Insertion/removal in the middle is O(n)"],
+        code:`import java.util.ArrayList;
+ArrayList<String> list = new ArrayList<>();
+list.add("Java");
+list.add("Python");
+System.out.println(list.get(0));`, learnMore:"https://www.w3schools.com/java/java_arraylist.asp" },
+      { title:"LinkedList", videoId:"gTLIrDIsWDM",
+        desc:"A doubly-linked list implementation, efficient for frequent insertions/deletions.",
+        merits:["Fast insert/delete at both ends","Implements both List and Deque interfaces"],
+        demerits:["Slower random access than ArrayList (O(n))","Higher memory overhead per element (node pointers)"],
+        code:`import java.util.LinkedList;
+LinkedList<Integer> list = new LinkedList<>();
+list.addFirst(1);
+list.addLast(2);
+System.out.println(list);`, learnMore:"https://www.w3schools.com/java/java_linkedlist.asp" },
+      { title:"HashSet", videoId:"6qQhCzr_zJY",
+        desc:"A collection that stores unique elements with no guaranteed order, backed by a hash table.",
+        merits:["Extremely fast add/remove/contains (O(1) average)","Automatically prevents duplicate values"],
+        demerits:["No guaranteed iteration order","Not synchronized — needs external handling for multithreading"],
+        code:`import java.util.HashSet;
+HashSet<String> set = new HashSet<>();
+set.add("A");
+set.add("A"); // ignored, duplicate
+System.out.println(set.size()); // 1`, learnMore:"https://www.w3schools.com/java/java_hashset.asp" },
+      { title:"HashMap", videoId:"iVGWykheJhU",
+        desc:"Stores data as key-value pairs, allowing fast lookup by key.",
+        merits:["Very fast average lookup, insert, delete (O(1))","Flexible for representing key-based relationships"],
+        demerits:["No guaranteed order of entries","Keys must have proper equals()/hashCode() to work correctly"],
+        code:`import java.util.HashMap;
+HashMap<String, Integer> map = new HashMap<>();
+map.put("Math", 90);
+map.put("Java", 95);
+System.out.println(map.get("Java"));`, learnMore:"https://www.w3schools.com/java/java_hashmap.asp" },
+      { title:"Iterator", videoId:"3-6dY6iaHSQ",
+        desc:"An object used to traverse collections one element at a time, with support for safe removal.",
+        merits:["Uniform way to loop through any Collection","Allows safe removal of elements while iterating"],
+        demerits:["More verbose than a for-each loop for simple reading","ConcurrentModificationException if collection changed incorrectly"],
+        code:`import java.util.*;
+ArrayList<String> list = new ArrayList<>(List.of("A","B","C"));
+Iterator<String> it = list.iterator();
+while (it.hasNext()) {
+    System.out.println(it.next());
+}`, learnMore:"https://www.w3schools.com/java/java_iterator.asp" }
+    ]
+  },
+  {
+    title: "Exception Handling",
+    intro: "ucpUzdqDubs",
+    desc: "Managing runtime errors gracefully so programs don't crash unexpectedly.",
+    topics: [
+      { title:"Try-Catch-Finally", videoId:"1XAqapkBEBE",
+        desc:"try wraps risky code, catch handles the exception, finally always runs cleanup code.",
+        merits:["Prevents program crashes from runtime errors","finally guarantees cleanup (e.g. closing files)"],
+        demerits:["Overusing try-catch can hide real bugs","Adds a bit of verbosity to simple code"],
+        code:`try {
+    int x = 5 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Error: " + e.getMessage());
+} finally {
+    System.out.println("Done");
+}`, learnMore:"https://www.w3schools.com/java/java_try_catch.asp" },
+      { title:"Throw & Throws", videoId:"XvOM3Cckmvs",
+        desc:"'throw' manually raises an exception; 'throws' declares that a method might throw one.",
+        merits:["Lets you enforce custom validation rules","Makes method contracts explicit to callers"],
+        demerits:["Overuse of throw for normal control flow is bad practice","Checked exceptions with throws add boilerplate"],
+        code:`void setAge(int age) throws IllegalArgumentException {
+    if (age < 0) throw new IllegalArgumentException("Age can't be negative");
+}`, learnMore:"https://www.w3schools.com/java/java_throw.asp" },
+      { title:"Custom Exceptions", videoId:"pyD3QaOSFOo",
+        desc:"User-defined exception classes that extend Exception or RuntimeException for domain-specific errors.",
+        merits:["Makes error handling more descriptive and specific","Improves readability for domain-related failures"],
+        demerits:["Too many custom exception types adds complexity","Requires extra classes to maintain"],
+        code:`class InsufficientBalanceException extends Exception {
+    InsufficientBalanceException(String msg) {
+        super(msg);
+    }
+}`, learnMore:"https://www.geeksforgeeks.org/java/user-defined-custom-exception-in-java/" },
+      { title:"Checked vs Unchecked", videoId:"nWeW6QoDdIY",
+        desc:"Checked exceptions are verified at compile-time; unchecked (RuntimeException) are only caught at runtime.",
+        merits:["Checked exceptions force handling of predictable errors","Unchecked exceptions keep code cleaner for programmer mistakes"],
+        demerits:["Checked exceptions can lead to excessive try-catch blocks","Unchecked exceptions can crash a program if not tested well"],
+        code:`// Checked: must be caught or declared
+throws IOException
+
+// Unchecked: no obligation to catch
+int[] arr = new int[3];
+arr[5] = 1; // ArrayIndexOutOfBoundsException`, learnMore:"https://www.geeksforgeeks.org/java/checked-vs-unchecked-exceptions-in-java/" },
+      { title:"Multi-catch", videoId:"1XAqapkBEBE",
+        desc:"Catching multiple exception types in a single catch block using the | operator.",
+        merits:["Reduces duplicate catch-block code","Keeps exception handling concise for similar error handling"],
+        demerits:["Can't access type-specific fields without instanceof checks","Only works when handling logic is genuinely identical"],
+        code:`try {
+    // risky code
+} catch (ArithmeticException | NumberFormatException e) {
+    System.out.println("Error: " + e.getMessage());
+}`, learnMore:"https://www.w3schools.com/java/java_try_catch.asp" }
+    ]
+  },
+  {
+    title: "File I/O",
+    intro: "jU0cndZziO0",
+    desc: "Reading from and writing to files on disk.",
+    topics: [
+      { title:"File Class", videoId:"6BSyB4mvOwg",
+        desc:"Represents file and directory paths, and provides methods to check, create, or delete files.",
+        merits:["Simple way to check file existence/metadata","Cross-platform path handling"],
+        demerits:["Doesn't handle reading/writing content itself","Older API — NIO.2 (java.nio.file) is more modern"],
+        code:`import java.io.File;
+File f = new File("data.txt");
+System.out.println(f.exists());
+System.out.println(f.length());`, learnMore:"https://www.w3schools.com/java/java_files.asp" },
+      { title:"FileReader/Writer", videoId:"WaLbTOTfHVI",
+        desc:"Basic classes for reading and writing character streams to and from files.",
+        merits:["Simple API for basic text file operations","Good for straightforward read/write tasks"],
+        demerits:["Not buffered, so can be slow for large files","No convenient line-by-line reading built in"],
+        code:`FileWriter fw = new FileWriter("out.txt");
+fw.write("Hello File");
+fw.close();`, learnMore:"https://www.w3schools.com/java/java_files_create.asp" },
+      { title:"BufferedReader", videoId:"WaLbTOTfHVI",
+        desc:"Wraps a Reader to add buffering, making file reads faster and enabling line-by-line reading.",
+        merits:["Much faster than plain FileReader for large files","readLine() makes line-based processing easy"],
+        demerits:["Slightly more setup (wrapping another Reader)","Must handle IOExceptions explicitly"],
+        code:`BufferedReader br = new BufferedReader(new FileReader("data.txt"));
+String line;
+while ((line = br.readLine()) != null) {
+    System.out.println(line);
+}
+br.close();`, learnMore:"https://www.geeksforgeeks.org/java/bufferedreader-class-in-java/" },
+      { title:"Scanner for Files", videoId:"61DiCXgqakU",
+        desc:"Using the Scanner class to read structured data (tokens, numbers, lines) from a file.",
+        merits:["Easy parsing of mixed data types from files","Familiar API if you already know Scanner for console input"],
+        demerits:["Slower than BufferedReader for large files","Less efficient for pure line-by-line text reading"],
+        code:`Scanner sc = new Scanner(new File("data.txt"));
+while (sc.hasNextLine()) {
+    System.out.println(sc.nextLine());
+}
+sc.close();`, learnMore:"https://www.w3schools.com/java/java_files_read.asp" },
+      { title:"try-with-resources", videoId:"1XAqapkBEBE",
+        desc:"A try statement that automatically closes resources (like files or streams) when done, even on error.",
+        merits:["Automatically closes resources, preventing leaks","Cleaner code — no need for manual finally-block closing"],
+        demerits:["Resource must implement AutoCloseable","Slightly unfamiliar syntax for beginners"],
+        code:`try (BufferedReader br = new BufferedReader(new FileReader("data.txt"))) {
+    System.out.println(br.readLine());
+} catch (IOException e) {
+    System.out.println("Error reading file");
+}`, learnMore:"https://www.geeksforgeeks.org/java/try-with-resources-feature-in-java/" }
+    ]
+  },
+  {
+    title: "Multithreading & Concurrency",
+    intro: "YDH7f9dTXAs",
+    desc: "Running multiple tasks simultaneously to improve performance.",
+    topics: [
+      { title:"Thread Class", videoId:"QOSs9tvHKR0",
+        desc:"Java's built-in class for creating and managing threads by extending Thread and overriding run().",
+        merits:["Simple way to create a thread directly","Direct access to thread-specific methods"],
+        demerits:["Java doesn't support multiple inheritance, so extending Thread blocks extending other classes","Less flexible than implementing Runnable"],
+        code:`class MyThread extends Thread {
+    public void run() {
+        System.out.println("Thread running");
+    }
+}
+new MyThread().start();`, learnMore:"https://www.w3schools.com/java/java_threads.asp" },
+      { title:"Runnable Interface", videoId:"QOSs9tvHKR0",
+        desc:"An interface representing a task to be executed by a thread — the preferred way to define thread logic.",
+        merits:["Allows the class to still extend another class","Better separation of task logic from thread management"],
+        demerits:["Slightly more setup than extending Thread directly","Still needs a Thread object to actually run it"],
+        code:`class MyTask implements Runnable {
+    public void run() {
+        System.out.println("Task running");
+    }
+}
+new Thread(new MyTask()).start();`, learnMore:"https://www.w3schools.com/java/java_threads.asp" },
+      { title:"Synchronization", videoId:"AVWDbrhKZDs",
+        desc:"Controlling access to shared resources across threads to prevent race conditions.",
+        merits:["Prevents data corruption from concurrent access","Ensures thread-safe operations on shared data"],
+        demerits:["Can cause performance bottlenecks","Improper use can lead to deadlocks"],
+        code:`synchronized void deposit(int amount) {
+    balance += amount;
+}`, learnMore:"https://www.geeksforgeeks.org/java/synchronization-in-java/" },
+      { title:"Thread Lifecycle", videoId:"QOSs9tvHKR0",
+        desc:"The states a thread passes through: New, Runnable, Blocked/Waiting, Timed Waiting, and Terminated.",
+        merits:["Understanding lifecycle helps debug concurrency issues","Explains why threads behave unexpectedly in certain states"],
+        demerits:["Managing state transitions manually is complex","Easy to introduce bugs like deadlock or starvation"],
+        code:`Thread t = new Thread(() -> System.out.println("running"));
+System.out.println(t.getState()); // NEW
+t.start();
+System.out.println(t.getState()); // RUNNABLE`, learnMore:"https://www.geeksforgeeks.org/java/lifecycle-and-states-of-a-thread-in-java/" },
+      { title:"Executor Framework", videoId:"6Dg1u1sWwFo",
+        desc:"A higher-level API for managing thread pools instead of manually creating and starting threads.",
+        merits:["Reuses threads efficiently via pooling","Simplifies managing many concurrent tasks"],
+        demerits:["Extra abstraction layer to learn","Must remember to shut down the executor properly"],
+        code:`ExecutorService executor = Executors.newFixedThreadPool(2);
+executor.submit(() -> System.out.println("Task 1"));
+executor.shutdown();`, learnMore:"https://www.geeksforgeeks.org/java/executor-framework-java/" }
+    ]
+  },
+  {
+    title: "Java 8+ Features / Mini Project",
+    desc: "Modern Java features that make code shorter and more expressive, capped with a final mini-project.",
+    topics: [
+      { title:"Lambda Expressions", videoId:"tj5sLSFjVj4",
+        desc:"A concise way to represent anonymous functions, mainly used with functional interfaces.",
+        merits:["Reduces boilerplate compared to anonymous classes","Makes functional-style code more readable"],
+        demerits:["Can hurt readability if overused for complex logic","Debugging lambda stack traces can be tricky"],
+        code:`Runnable r = () -> System.out.println("Running lambda");
+r.run();`, learnMore:"https://www.w3schools.com/java/java_lambda.asp" },
+      { title:"Streams API", videoId:"t1-YZ6bF-g0",
+        desc:"A functional-style API for processing collections through operations like filter, map, and reduce.",
+        merits:["Expressive, declarative data processing","Supports parallel processing easily"],
+        demerits:["Learning curve for beginners","Can be less efficient than plain loops for simple tasks"],
+        code:`List<Integer> nums = List.of(1,2,3,4,5);
+int sum = nums.stream()
+    .filter(n -> n % 2 == 0)
+    .mapToInt(Integer::intValue)
+    .sum();
+System.out.println(sum); // 6`, learnMore:"https://www.w3schools.com/java/java_streams.asp" },
+      { title:"Optional Class", videoId:"5CIw9cyMhTQ",
+        desc:"A container object used to represent the presence or absence of a value, avoiding null pointer errors.",
+        merits:["Reduces NullPointerException risk","Encourages explicit handling of missing values"],
+        demerits:["Adds slight verbosity vs plain null checks","Misusing it (e.g. Optional fields) is a bad practice"],
+        code:`Optional<String> name = Optional.ofNullable(null);
+System.out.println(name.orElse("Default Name"));`, learnMore:"https://www.geeksforgeeks.org/java/java-8-optional-class/" },
+      { title:"Method References", videoId:"vpjhePwWpMA",
+        desc:"A shorthand notation for lambdas that just call an existing method, using the :: operator.",
+        merits:["Even more concise than lambdas for simple calls","Improves readability when reusing existing methods"],
+        demerits:["Only works when the lambda purely delegates to one method","Can be confusing for beginners unfamiliar with the syntax"],
+        code:`List<String> names = List.of("Jubayer","Rahim");
+names.forEach(System.out::println);`, learnMore:"https://www.w3schools.com/java/java_method_references.asp" },
+      { title:"Final Mini-Project", videoId:"",
+        desc:"A capstone project combining OOP, collections, exception handling, and Java 8 features — e.g. a simple Student Management System or a Console-based Library System.",
+        merits:["Ties together everything learned across all 10 modules","Great addition to your GitHub as a real, working project"],
+        demerits:["Requires more time and planning than single-topic exercises","Debugging integrated systems is harder than isolated snippets"],
+        code:`// Example structure:
+// - Student class (OOP)
+// - ArrayList<Student> database (Collections)
+// - try-catch for invalid input (Exceptions)
+// - Streams to filter/sort students
+// - Menu-driven console app using Scanner`,
+        learnMore:"https://www.geeksforgeeks.org/java/java-projects-for-beginners/" }
+    ]
+  }
+];
+
+// ================= PROGRESS TRACKING =================
+function getProgress(){
+  try { return JSON.parse(localStorage.getItem('java-course-progress') || '{}'); }
+  catch(e){ return {}; }
+}
+function setTopicDone(key, done){
+  const p = getProgress();
+  if(done) p[key] = true; else delete p[key];
+  try { localStorage.setItem('java-course-progress', JSON.stringify(p)); } catch(e){}
+}
+function isTopicDone(key){
+  return !!getProgress()[key];
+}
+function moduleProgress(idx){
+  const m = modules[idx];
+  const p = getProgress();
+  const done = m.topics.filter((t,ti)=>p[idx+'-'+ti]).length;
+  return { done, total: m.topics.length };
+}
+function overallProgress(){
+  const p = getProgress();
+  let done=0, total=0;
+  modules.forEach((m,idx)=>{ total+=m.topics.length; m.topics.forEach((t,ti)=>{ if(p[idx+'-'+ti]) done++; }); });
+  return { done, total };
+}
+function updateOverallBar(){
+  const {done,total} = overallProgress();
+  const pct = total ? Math.round(done/total*100) : 0;
+  const bar = document.getElementById('overall-progress-bar');
+  const label = document.getElementById('overall-progress-label');
+  if(bar) bar.style.width = pct + '%';
+  if(label) label.textContent = `${done} / ${total} topics completed (${pct}%)`;
+}
+
+// ================= RENDER =================
+const moduleList = document.getElementById('module-list');
+const modulePanel = document.getElementById('module-panel');
+
+function renderModuleList(activeIdx){
+  moduleList.innerHTML = modules.map((m, i) => {
+    const {done,total} = moduleProgress(i);
+    return `
+    <button class="module-btn ${i===activeIdx?'active':''}" data-idx="${i}">
+      <span><span class="num">${String(i+1).padStart(2,'0')}</span>${m.title}</span>
+      <span class="module-progress-tag">${done}/${total}</span>
+    </button>
+  `}).join('');
+  moduleList.querySelectorAll('.module-btn').forEach(btn=>{
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.idx);
+      renderModuleList(idx);
+      renderModulePanel(idx);
+    });
+  });
+}
+
+function renderModulePanel(idx){
+  const m = modules[idx];
+  const {done,total} = moduleProgress(idx);
+  const pct = total ? Math.round(done/total*100) : 0;
+  modulePanel.innerHTML = `
+    <h3 class="module-title">Module ${idx+1}: ${m.title}</h3>
+    <p class="module-desc">${m.desc}</p>
+    <div class="module-progress-bar-wrap">
+      <div class="module-progress-bar-track"><div class="module-progress-bar-fill" style="width:${pct}%;"></div></div>
+      <span class="module-progress-bar-label">${done}/${total} done</span>
+    </div>
+    ${m.intro ? `<a href="https://www.youtube.com/watch?v=${m.intro}" target="_blank" class="video-thumb-link" style="display:block; margin-bottom:28px;"><div class="topic-video" style="background-image:url('https://img.youtube.com/vi/${m.intro}/hqdefault.jpg'); background-size:cover; background-position:center;"><div class="play-overlay"></div></div></a>` : ''}
+    <div class="topic-grid">
+      ${m.topics.map((t, ti) => {
+        const key = idx+'-'+ti;
+        const doneT = isTopicDone(key);
+        return `
+        <div class="topic-card ${doneT?'done':''}" data-tid="${key}">
+          <div class="topic-header">
+            <label class="topic-check" onclick="event.stopPropagation()">
+              <input type="checkbox" class="topic-checkbox" data-key="${key}" ${doneT?'checked':''}>
+            </label>
+            <h4>${t.title}</h4>
+            <span class="chevron">▶</span>
+          </div>
+          <div class="topic-body">
+            <div class="topic-body-inner">
+              ${t.videoId ? `<a href="https://www.youtube.com/watch?v=${t.videoId}" target="_blank" class="video-thumb-link" style="display:block;"><div class="topic-video" style="background-image:url('https://img.youtube.com/vi/${t.videoId}/hqdefault.jpg'); background-size:cover; background-position:center;"><div class="play-overlay"></div></div></a>` : `<div class="placeholder-note">Video for this topic will be added soon.</div>`}
+              <div class="topic-section-label">Description</div>
+              <p>${t.desc}</p>
+              <div class="merit-demerit">
+                <div class="merits">
+                  <div class="topic-section-label">Merits</div>
+                  <ul>${t.merits.map(x=>`<li>${x}</li>`).join('')}</ul>
+                </div>
+                <div class="demerits">
+                  <div class="topic-section-label">Demerits</div>
+                  <ul>${t.demerits.map(x=>`<li>${x}</li>`).join('')}</ul>
+                </div>
+              </div>
+              <div class="topic-section-label">Code Example</div>
+              <pre>${t.code.replace(/</g,'&lt;')}</pre>
+              <a class="learn-more" href="${t.learnMore}" target="_blank">Learn more →</a>
+            </div>
+          </div>
+        </div>
+      `}).join('')}
+    </div>
+  `;
+  modulePanel.querySelectorAll('.topic-card').forEach(card=>{
+    const header = card.querySelector('.topic-header');
+    const body = card.querySelector('.topic-body');
+    header.addEventListener('click', (e) => {
+      if(e.target.closest('.topic-check')) return;
+      const isOpen = card.classList.contains('open');
+      modulePanel.querySelectorAll('.topic-card.open').forEach(c=>{
+        if(c!==card){ c.classList.remove('open'); c.querySelector('.topic-body').style.maxHeight = null; }
+      });
+      if(isOpen){
+        card.classList.remove('open');
+        body.style.maxHeight = null;
+      } else {
+        card.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 40 + 'px';
+      }
+    });
+  });
+  modulePanel.querySelectorAll('.topic-checkbox').forEach(cb=>{
+    cb.addEventListener('change', () => {
+      setTopicDone(cb.dataset.key, cb.checked);
+      cb.closest('.topic-card').classList.toggle('done', cb.checked);
+      renderModuleList(idx);
+      renderModulePanel(idx);
+      updateOverallBar();
+    });
+  });
+}
+
+renderModuleList(0);
+renderModulePanel(0);
+updateOverallBar();
+
+// ================= SEARCH =================
+const searchInput = document.getElementById('topic-search');
+const searchResults = document.getElementById('search-results');
+
+function flatTopics(){
+  const list = [];
+  modules.forEach((m, mi) => {
+    m.topics.forEach((t, ti) => {
+      list.push({ title: t.title, moduleTitle: m.title, moduleIdx: mi, topicIdx: ti });
+    });
+  });
+  return list;
+}
+const allTopics = flatTopics();
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  if(!q){ searchResults.classList.remove('show'); searchResults.innerHTML=''; return; }
+  const matches = allTopics.filter(t => t.title.toLowerCase().includes(q) || t.moduleTitle.toLowerCase().includes(q)).slice(0, 8);
+  if(matches.length === 0){
+    searchResults.innerHTML = `<div class="search-no-results">No topics found for "${searchInput.value}"</div>`;
+  } else {
+    searchResults.innerHTML = matches.map(m => `
+      <div class="search-result-item" data-mi="${m.moduleIdx}" data-ti="${m.topicIdx}">
+        <span class="srt-title">${m.title}</span>
+        <span class="srt-module">Module ${m.moduleIdx+1} · ${m.moduleTitle}</span>
+      </div>
+    `).join('');
+  }
+  searchResults.classList.add('show');
+});
+
+searchResults.addEventListener('click', (e) => {
+  const item = e.target.closest('.search-result-item');
+  if(!item || !item.dataset.mi) return;
+  const mi = parseInt(item.dataset.mi);
+  const ti = parseInt(item.dataset.ti);
+  renderModuleList(mi);
+  renderModulePanel(mi);
+  searchResults.classList.remove('show');
+  searchInput.value = '';
+  setTimeout(() => {
+    const card = modulePanel.querySelector(`[data-tid="${mi}-${ti}"]`);
+    if(card){
+      card.scrollIntoView({ behavior:'smooth', block:'center' });
+      card.querySelector('.topic-header').click();
+    }
+  }, 50);
+});
+
+document.addEventListener('click', (e) => {
+  if(!e.target.closest('.search-wrap')) searchResults.classList.remove('show');
+});
+
+// ================= THEME TOGGLE =================
+const themeBtn = document.getElementById('theme-toggle');
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  themeBtn.textContent = t === 'light' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch(e){}
+}
+let savedTheme = 'dark';
+try { savedTheme = localStorage.getItem('theme') || 'dark'; } catch(e){}
+applyTheme(savedTheme);
+themeBtn.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  applyTheme(current === 'light' ? 'dark' : 'light');
+});
+
+// ================= SKILL BARS =================
+const skills = [
+  { name:"Java", pct:70 },
+  { name:"OOP", pct:65 },
+  { name:"Data Structures & Algorithms", pct:50 },
+  { name:"C", pct:55 },
+  { name:"C++", pct:45 },
+  { name:"Git", pct:50 },
+  { name:"HTML (Basic)", pct:40 },
+  { name:"Problem Solving", pct:60 }
+];
+const skillBarsEl = document.getElementById('skill-bars');
+skillBarsEl.innerHTML = skills.map(s => `
+  <div class="skill-bar-row">
+    <div class="skill-bar-top"><span>${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
+    <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="${s.pct}"></div></div>
+  </div>
+`).join('');
+
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.querySelectorAll('.skill-bar-fill').forEach(fill => {
+        fill.style.width = fill.dataset.pct + '%';
+      });
+      skillObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+skillObserver.observe(skillBarsEl);
+
+// ================= CODE PLAYGROUND =================
+const pgSelect = document.getElementById('playground-select');
+const pgCode = document.getElementById('playground-code');
+pgSelect.innerHTML = modules.map((m, mi) =>
+  `<optgroup label="Module ${mi+1}: ${m.title}">` +
+  m.topics.map((t, ti) => `<option value="${mi}-${ti}">${t.title}</option>`).join('') +
+  `</optgroup>`
+).join('');
+function showPlaygroundCode(mi, ti){
+  const t = modules[mi].topics[ti];
+  pgCode.textContent = t.code;
+}
+pgSelect.addEventListener('change', () => {
+  const [mi, ti] = pgSelect.value.split('-').map(Number);
+  showPlaygroundCode(mi, ti);
+});
+showPlaygroundCode(0, 0);
+
+// ================= QUIZ =================
+const quizData = [
+  { questions: [
+    { q:"Which keyword declares a variable that cannot be reassigned?", opts:["var","final","static","const"], correct:1 },
+    { q:"What does Scanner's nextLine() return?", opts:["int","String","char","boolean"], correct:1 },
+    { q:"Casting a double to an int is called:", opts:["Widening","Boxing","Narrowing","Autoboxing"], correct:2 }
+  ]},
+  { questions: [
+    { q:"Which loop guarantees at least one execution?", opts:["for","while","do-while","foreach"], correct:2 },
+    { q:"What does 'break' do inside a loop?", opts:["Skips to next iteration","Exits the loop entirely","Restarts the loop","Pauses the loop"], correct:1 },
+    { q:"switch statements work with which of these?", opts:["Only int","Only String","int, String, enum, etc.","Only boolean"], correct:2 }
+  ]},
+  { questions: [
+    { q:"A constructor's main job is to:", opts:["Delete objects","Initialize a new object","Compile the class","Import packages"], correct:1 },
+    { q:"'this' keyword refers to:", opts:["The parent class","The current object","A static variable","An interface"], correct:1 },
+    { q:"Which access modifier is most restrictive?", opts:["public","protected","default","private"], correct:3 }
+  ]},
+  { questions: [
+    { q:"Which OOP concept allows a subclass to reuse a superclass's code?", opts:["Polymorphism","Inheritance","Abstraction","Encapsulation"], correct:1 },
+    { q:"An abstract class:", opts:["Can never have concrete methods","Cannot be instantiated directly","Must be an interface","Cannot have fields"], correct:1 },
+    { q:"Interfaces mainly support:", opts:["Multiple inheritance of type","Data hiding only","Constructors","Only static methods"], correct:0 }
+  ]},
+  { questions: [
+    { q:"Java Strings are:", opts:["Mutable","Immutable","Primitive types","Always null"], correct:1 },
+    { q:"Which class is more efficient for repeated string concatenation?", opts:["String","StringBuilder","Integer","Array"], correct:1 },
+    { q:"A 2D array in Java is best described as:", opts:["An array of arrays","A single row of data","A HashMap","A String array only"], correct:0 }
+  ]},
+  { questions: [
+    { q:"Which collection stores only unique elements?", opts:["ArrayList","LinkedList","HashSet","HashMap"], correct:2 },
+    { q:"HashMap stores data as:", opts:["Key-value pairs","Only keys","Sorted arrays","Linked nodes only"], correct:0 },
+    { q:"What is used to safely remove elements while looping?", opts:["for loop","Iterator","if-else","switch"], correct:1 }
+  ]},
+  { questions: [
+    { q:"Which block always executes, error or not?", opts:["try","catch","finally","throw"], correct:2 },
+    { q:"Checked exceptions are verified at:", opts:["Runtime","Compile-time","Never","Deployment"], correct:1 },
+    { q:"'throw' is used to:", opts:["Declare a method may fail","Manually raise an exception","Catch an exception","Close a resource"], correct:1 }
+  ]},
+  { questions: [
+    { q:"Which class adds buffering for faster file reads?", opts:["FileReader","BufferedReader","Scanner","File"], correct:1 },
+    { q:"try-with-resources automatically:", opts:["Deletes the file","Closes the resource","Encrypts data","Compiles the code"], correct:1 },
+    { q:"Which class checks if a file exists?", opts:["File","FileWriter","BufferedWriter","Scanner"], correct:0 }
+  ]},
+  { questions: [
+    { q:"Runnable interface is used to:", opts:["Stop a thread","Define task logic for a thread","Delete a thread","Import threads"], correct:1 },
+    { q:"'synchronized' keyword helps prevent:", opts:["Compilation errors","Race conditions","Memory leaks","Null pointers"], correct:1 },
+    { q:"ExecutorService mainly helps with:", opts:["Managing thread pools","String formatting","File reading","Exception handling"], correct:0 }
+  ]},
+  { questions: [
+    { q:"Lambda expressions are mainly used with:", opts:["Abstract classes","Functional interfaces","Static blocks","Arrays only"], correct:1 },
+    { q:"Optional class helps avoid:", opts:["ArrayIndexOutOfBounds","NullPointerException","ClassCastException","StackOverflowError"], correct:1 },
+    { q:"Streams API supports operations like:", opts:["filter, map, reduce","only sorting","only printing","compiling"], correct:0 }
+  ]}
+];
+
+const quizSelect = document.getElementById('quiz-select');
+const quizBody = document.getElementById('quiz-body');
+quizSelect.innerHTML = modules.map((m, i) => `<option value="${i}">Module ${i+1}: ${m.title}</option>`).join('');
+
+function renderQuiz(idx){
+  const qs = quizData[idx].questions;
+  let score = 0;
+  let answered = 0;
+  quizBody.innerHTML = qs.map((item, qi) => `
+    <div class="quiz-question" data-qi="${qi}">
+      <div class="quiz-q-text">${qi+1}. ${item.q}</div>
+      <div class="quiz-options">
+        ${item.opts.map((opt, oi) => `<div class="quiz-option" data-oi="${oi}">${opt}</div>`).join('')}
+      </div>
+    </div>
+  `).join('') + `<div class="quiz-score" id="quiz-score" style="display:none;"></div>`;
+
+  quizBody.querySelectorAll('.quiz-question').forEach((qEl, qi) => {
+    const correctIdx = qs[qi].correct;
+    qEl.querySelectorAll('.quiz-option').forEach(optEl => {
+      optEl.addEventListener('click', () => {
+        if(qEl.classList.contains('answered')) return;
+        qEl.classList.add('answered');
+        const chosen = parseInt(optEl.dataset.oi);
+        qEl.querySelectorAll('.quiz-option').forEach(o => o.classList.add('disabled'));
+        if(chosen === correctIdx){
+          optEl.classList.add('correct');
+          score++;
+        } else {
+          optEl.classList.add('incorrect');
+          qEl.querySelector(`[data-oi="${correctIdx}"]`).classList.add('correct');
+        }
+        answered++;
+        if(answered === qs.length){
+          const scoreEl = document.getElementById('quiz-score');
+          scoreEl.style.display = 'block';
+          scoreEl.textContent = `Score: ${score} / ${qs.length}`;
+        }
+      });
+    });
+  });
+}
+
+quizSelect.addEventListener('change', () => renderQuiz(parseInt(quizSelect.value)));
+renderQuiz(0);
+
+
+
+
+// ================= 2.2 SEMESTER COURSES =================
+const semesterCourses = [
+  { code:"ICT 2201", title:"Operating System", desc:"Process scheduling, memory management, and file systems.", status:"live" },
+  { code:"ICT 2202", title:"Operating System Lab", desc:"Practical OS concepts using shell scripting and system calls.", status:"soon" },
+  { code:"ICT 2203", title:"Microprocessor and Embedded Systems", desc:"8086 architecture, assembly language, and embedded system design.", status:"soon" },
+  { code:"ICT 2204", title:"Microprocessor and Embedded Systems Lab", desc:"Hands-on assembly programming and hardware interfacing.", status:"soon" },
+  { code:"ICT 2205", title:"Communication Engineering", desc:"Signals, modulation techniques, and transmission fundamentals.", status:"soon" },
+  { code:"ICT 2206", title:"Communication Engineering Lab", desc:"Practical experiments in signal transmission and modulation.", status:"soon" },
+  { code:"ICT 2207", title:"Object Oriented Pattern and Design", desc:"Java, OOP principles, and software design patterns.", status:"live" },
+  { code:"ICT 2208", title:"Object Oriented Pattern and Design Lab", desc:"Applied OOP and design-pattern implementation in Java.", status:"soon" },
+  { code:"ICT 2211", title:"Complex Variables and Fourier Analysis", desc:"Complex functions, transforms, and their engineering applications.", status:"soon" },
+  { code:"ICT 2213", title:"Economics and Managerial Accounting", desc:"Micro/macroeconomic principles and core accounting for managers.", status:"soon" },
+  { code:"ICT 2200", title:"Project — II", desc:"Capstone project work for the semester.", status:"soon" }
+];
+
+const semesterGrid = document.getElementById('semester-grid');
+
+function loadNote(key){
+  try { return localStorage.getItem('note:' + key) || ''; }
+  catch(e){ return ''; }
+}
+function saveNote(key, value){
+  try { localStorage.setItem('note:' + key, value); }
+  catch(e){ /* storage unavailable */ }
+}
+
+semesterGrid.innerHTML = semesterCourses.map((c, i) => `
+  <div class="course-card" data-cid="${i}">
+    <div class="course-card-top">
+      <span class="course-code">${c.code}</span>
+      <span class="course-badge ${c.status==='live' ? 'live' : ''}">${c.status==='live' ? 'notes open' : 'notes ready'}</span>
+    </div>
+    <h4>${c.title}</h4>
+    <p class="course-desc">${c.desc}</p>
+    <button class="course-toggle" data-idx="${i}">Add / view notes →</button>
+    <div class="course-notes" id="notes-${i}">
+      <div class="course-notes-inner">
+        <textarea class="note-area" data-key="${c.code}" placeholder="Write your notes for ${c.title} here..."
+          style="width:100%; min-height:120px; background:#0a0e14; border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:var(--sans); font-size:0.9rem; padding:12px; resize:vertical;">${loadNote(c.code)}</textarea>
+        <div style="display:flex; gap:10px; margin-top:10px; align-items:center;">
+          <button class="btn save-note-btn" data-key="${c.code}">Save Note</button>
+          <span class="save-status" style="font-family:var(--mono); font-size:0.78rem; color:var(--brand-2); opacity:0;">Saved ✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+`).join('');
+
+semesterGrid.querySelectorAll('.course-card').forEach(card=>{
+  const idx = card.dataset.cid;
+  const toggle = card.querySelector('.course-toggle');
+  const notes = card.querySelector('.course-notes');
+  toggle.addEventListener('click', () => {
+    const isOpen = notes.style.maxHeight && notes.style.maxHeight !== '0px';
+    if(isOpen){
+      notes.style.maxHeight = null;
+      toggle.textContent = 'Add / view notes →';
+    } else {
+      notes.style.maxHeight = notes.scrollHeight + 20 + 'px';
+      toggle.textContent = 'Hide notes ↑';
+    }
+  });
+  const saveBtn = card.querySelector('.save-note-btn');
+  const status = card.querySelector('.save-status');
+  saveBtn.addEventListener('click', () => {
+    const textarea = card.querySelector('.note-area');
+    saveNote(saveBtn.dataset.key, textarea.value);
+    status.style.opacity = '1';
+    setTimeout(()=>{ status.style.opacity = '0'; }, 1500);
+  });
+});
+</script>
+
+</body>
+</html>
